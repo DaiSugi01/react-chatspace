@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React, { createContext, useContext } from 'react'
 
 import useLocalStorage from '../hooks/useLocalStorage';
 
-const ContactsContext = React.createContext();
+const ContactsContext = createContext();
 
 export function useContacts() {
   return useContext(ContactsContext);
