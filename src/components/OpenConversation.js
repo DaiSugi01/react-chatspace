@@ -1,10 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useConversations } from '../contexts/ConversationsProvider';
 
 export default function OpenConversation() {
   const [text, setText] = useState('');
-  const lastMessageRef = useRef();
   const setRef = useCallback(node => {
     console.log(node)
     if (node) {
