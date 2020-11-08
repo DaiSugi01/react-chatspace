@@ -5,7 +5,6 @@ import { useConversations } from '../contexts/ConversationsProvider';
 export default function OpenConversation() {
   const [text, setText] = useState('');
   const setRef = useCallback(node => {
-    console.log(node)
     if (node) {
       node.scrollIntoView({ smooth: true })
     }
@@ -35,7 +34,7 @@ export default function OpenConversation() {
                 ref={lastMessage ? setRef : null}
                 key={index}
                 className={`my-1 d-flex flex-column 
-                ${message.fromMe ? 'align-self-end' : ''}`}
+                ${message.fromMe ? 'align-self-end align-items-end' : 'align-items-start'}`}
               >
                 <div className={`rounded px-2 py-1 
                   ${message.fromMe ? 'bg-primary text-white' : 'border'}`}>
