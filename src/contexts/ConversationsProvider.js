@@ -33,7 +33,7 @@ export function ConversationsProvider(props) {
             messages: [...conversation.messages, newMessage]
           };
         }
-        
+
         return conversation;
       })
 
@@ -42,7 +42,8 @@ export function ConversationsProvider(props) {
       } else {
         return [
           ...prevConversations,
-          { recipients, messages: [newMessage]}]
+          { recipients, messages: [newMessage] }
+        ]
       };
     })
   }, [setConversations])
@@ -50,13 +51,14 @@ export function ConversationsProvider(props) {
   useEffect(() => {
     if (socket == null) return;
 
-    socket.on('receive-messge', addMessageToConversation);
+    socket.on('receive-message', addMessageToConversation);
 
     return () => socket.off('receive-message');
   }, [socket, addMessageToConversation])
 
   function sendMessage(recipients, text) {
-    socket.emit('send-message', { recipients, text });
+    socket.emit('send-message', { recipients, text })
+
     addMessageToConversation({ recipients, text, sender: props.id })
   }
 
@@ -71,15 +73,15 @@ export function ConversationsProvider(props) {
 
     const messages = conversation.messages.map(message => {
       const contact = contacts.find(contact => {
-        return contact.id === message.sender;
+        return contact.id === message.sender
       })
       const name = (contact && contact.name) || message.sender
-      const fromMe = props.id === message.sender;
+      const fromMe = props.id === message.sender
       return { ...message, senderName: name, fromMe }
     })
-
-    const selected = index === selectedConversationIndex;
-    return { ...conversation, messages, recipients, selected };
+    
+    const selected = index === selectedConversationIndex
+    return { ...conversation, messages, recipients, selected }
   })
 
   const value = {
@@ -98,12 +100,12 @@ export function ConversationsProvider(props) {
 }
 
 function arrayEquality(a, b) {
-  if (a.length !== b.length) return false;
+  if (a.length !== b.length) return false
 
-  a.sort();
-  b.sort();
+  a.sort()
+  b.sort()
 
   return a.every((element, index) => {
-    return element === b[index];
+    return element === b[index]
   })
 }
